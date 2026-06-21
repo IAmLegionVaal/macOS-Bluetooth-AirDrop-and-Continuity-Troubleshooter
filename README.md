@@ -1,26 +1,49 @@
 # macOS Bluetooth, AirDrop and Continuity Troubleshooter
 
-A read-only Bash toolkit for collecting Bluetooth hardware, paired-device, AirDrop, Handoff, Continuity, Wi-Fi dependency, service, and recent event evidence.
+A macOS support toolkit for diagnosing and repairing common Bluetooth, AirDrop, Handoff and Continuity problems.
 
-## Usage
+## Diagnostic script
 
 ```bash
 chmod +x src/bluetooth_continuity_troubleshooter.sh
 ./src/bluetooth_continuity_troubleshooter.sh --hours 24
 ```
 
-## Checks performed
+The diagnostic script collects Bluetooth hardware and device data, AirDrop and Continuity service state, Wi-Fi and AWDL information, preference indicators and recent events.
 
-- Bluetooth controller and device inventory
-- Bluetooth, sharing, AirDrop, and Continuity processes
-- Wi-Fi interface and peer-to-peer interface state
-- Handoff and AirDrop preference indicators
-- Recent Bluetooth, sharingd, AirDrop, and Continuity events
-- Text, CSV, and JSON reports
+## Repair script
 
-## Safety
+Preview the repair:
 
-The script does not pair or unpair devices, reset Bluetooth, change AirDrop visibility, toggle Wi-Fi, or alter Handoff settings.
+```bash
+chmod +x src/bluetooth_continuity_repair.sh
+./src/bluetooth_continuity_repair.sh --repair --dry-run
+```
+
+Apply the service repair:
+
+```bash
+./src/bluetooth_continuity_repair.sh --repair
+```
+
+Apply the repair and also cycle Wi-Fi:
+
+```bash
+./src/bluetooth_continuity_repair.sh --repair --cycle-wifi
+```
+
+## What the repair does
+
+- Restarts the Bluetooth system service.
+- Restarts `sharingd`, `rapportd` and `nearbyd` when they are running.
+- Can optionally cycle the detected Wi-Fi interface to recover AirDrop and Continuity dependencies.
+- Supports dry-run and confirmation controls.
+- Writes a repair log and post-repair verification report.
+- Returns clear success, warning and invalid-argument exit codes.
+
+## Safety and limitations
+
+The tool does not unpair devices, erase Bluetooth preferences or change AirDrop visibility. Cycling Wi-Fi temporarily disconnects active network sessions and therefore requires confirmation. Hardware faults, radio interference and unsupported devices may still need manual investigation.
 
 ## Author
 
