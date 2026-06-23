@@ -45,6 +45,6 @@ Apply the repair and also cycle Wi-Fi:
 
 The tool does not unpair devices, erase Bluetooth preferences or change AirDrop visibility. Cycling Wi-Fi temporarily disconnects active network sessions and therefore requires confirmation. Hardware faults, radio interference and unsupported devices may still need manual investigation.
 
-## Author
+## Maintainer
 
-Dewald Pretorius — L2 IT Support Engineer
+IAmLegionVaal
